@@ -1,4 +1,4 @@
-# 🗃️ [NOME DO TEU PROJETO]
+# 🗃️ [PROJETO]
 
 Um arquivo digital minimalista que preserva a identidade gráfica de mais de 600 cartões de visita.
 
