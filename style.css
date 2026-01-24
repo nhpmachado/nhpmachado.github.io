@@ -257,3 +257,47 @@ body {
     letter-spacing: 1px;
     z-index: 999; /* Fica logo atrás do menu */
 }
+
+/* --- 6. OPTIMIZAÇÃO MOBILE --- */
+@media (max-width: 768px) {
+    /* 1. Ajustar o tamanho dos cartões nas faixas */
+    .card-item {
+        flex: 0 0 250px; /* Cartões mais pequenos para caberem melhor */
+        width: 280px;
+        height: 170px;
+        margin: 0 10px;
+        padding: 4px; /* Moldura mais fina */
+    }
+
+    /* 2. Menu Dock vira um Menu Scrollable */
+    .menu {
+        bottom: 20px; /* Sobe um pouco para não bater na barra do telemóvel */
+        width: 90%;
+        padding: 0 15px;
+        overflow-x: auto; /* Permite deslizar as categorias com o dedo */
+        justify-content: flex-start; /* Alinha à esquerda para o scroll funcionar */
+        -webkit-overflow-scrolling: touch; /* Scroll suave no iPhone */
+    }
+
+    /* 3. Modal em coluna (Imagem em cima, texto em baixo) */
+    .modal-body {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+    }
+
+    .modal-content {
+        padding: 25px 15px;
+        max-height: 90vh;
+        overflow-y: auto; /* Permite ler o texto se for longo */
+    }
+
+    .modal-image-container img {
+        width: 100%; /* Imagem ocupa a largura toda disponível */
+    }
+
+    /* 4. Esconder o crédito de designer em ecrãs muito pequenos para limpar o visual */
+    .designer-credit {
+        display: none;
+    }
+}
