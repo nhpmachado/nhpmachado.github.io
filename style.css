@@ -258,45 +258,102 @@ body {
     z-index: 999; /* Fica logo atrás do menu */
 }
 
-/* --- 6. OPTIMIZAÇÃO MOBILE --- */
+/* --- 6. OPTIMIZAÇÃO PARA MOBILE (MEDIA QUERIES) --- */
 @media (max-width: 768px) {
-    /* 1. Ajustar o tamanho dos cartões nas faixas */
+    
+    /* Ajuste das faixas e dos cartões */
+    .museum-container {
+        gap: 15px;
+        padding-bottom: 80px; /* Mais espaço para não sobrepor o menu */
+    }
+
     .card-item {
-        flex: 0 0 250px; /* Cartões mais pequenos para caberem melhor */
-        width: 280px;
-        height: 170px;
-        margin: 0 10px;
-        padding: 4px; /* Moldura mais fina */
+        flex: 0 0 260px; /* Cartões mais estreitos no telemóvel */
+        width: 260px;
+        height: 160px;
+        margin: 0 8px;
+        padding: 5px; /* Moldura branca mais fina */
     }
 
-    /* 2. Menu Dock vira um Menu Scrollable */
+    /* MENU DOCK - Versão Scrollable para Mobile */
     .menu {
-        bottom: 20px; /* Sobe um pouco para não bater na barra do telemóvel */
-        width: 90%;
-        padding: 0 15px;
-        overflow-x: auto; /* Permite deslizar as categorias com o dedo */
-        justify-content: flex-start; /* Alinha à esquerda para o scroll funcionar */
-        -webkit-overflow-scrolling: touch; /* Scroll suave no iPhone */
+        bottom: 25px; /* Afastado da borda inferior do sistema */
+        width: 95%;
+        height: 55px;
+        padding: 0 20px;
+        gap: 18px;
+        
+        /* Ativa o deslize lateral das categorias */
+        overflow-x: auto;      
+        justify-content: flex-start; 
+        white-space: nowrap;
+        
+        /* Esconde a barra de scroll visual */
+        scrollbar-width: none; 
+        -webkit-overflow-scrolling: touch; /* Scroll suave no iOS */
     }
 
-    /* 3. Modal em coluna (Imagem em cima, texto em baixo) */
+    .menu::-webkit-scrollbar {
+        display: none;
+    }
+
+    .menu-logo {
+        position: sticky;
+        left: 0;
+        z-index: 5;
+        background: rgba(25, 25, 25, 0.9); /* Fundo para não sobrepor texto ao deslizar */
+        padding-right: 10px;
+        margin-right: 5px;
+    }
+
+    .menu a {
+        font-size: 11px;
+        letter-spacing: 0.5px;
+        padding: 5px 2px;
+    }
+
+    .menu a:active {
+        color: #a855f7;
+        transform: scale(0.95);
+    }
+
+    #pauseBtn {
+        width: 34px;
+        height: 34px;
+        min-width: 34px;
+        font-size: 10px;
+    }
+
+    /* JANELA MODAL - Versão Mobile (Vertical) */
+    .modal-content {
+        padding: 30px 20px;
+        width: 95%;
+        max-height: 85vh;
+        overflow-y: auto; /* Permite scroll se o texto for longo */
+        border-radius: 20px;
+    }
+
     .modal-body {
-        flex-direction: column;
-        gap: 20px;
+        flex-direction: column; /* Imagem em cima, texto em baixo */
+        gap: 25px;
         text-align: center;
     }
 
-    .modal-content {
-        padding: 25px 15px;
-        max-height: 90vh;
-        overflow-y: auto; /* Permite ler o texto se for longo */
-    }
-
     .modal-image-container img {
-        width: 100%; /* Imagem ocupa a largura toda disponível */
+        width: 100%; /* Cartão ocupa a largura toda */
+        max-width: 320px;
+        margin: 0 auto;
     }
 
-    /* 4. Esconder o crédito de designer em ecrãs muito pequenos para limpar o visual */
+    .modal-info-text h2 {
+        font-size: 22px;
+    }
+
+    .modal-info-text p {
+        font-size: 16px;
+    }
+
+    /* Esconde o crédito fixo no mobile para limpar o ecrã */
     .designer-credit {
         display: none;
     }
