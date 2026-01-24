@@ -132,6 +132,7 @@ class Museu {
     // 3. Quando a imagem terminar de carregar, adicionamos o Fade In
     modalImg.onload = () => {
         modalImg.classList.add('loaded');
+        img.loading = "lazy";
     };
 
     // Preenchimento dos textos (igual ao anterior)
@@ -150,5 +151,6 @@ class Museu {
     document.getElementById('card-modal').classList.add('active');
     }
 }
+
 
 const museu = new Museu();
