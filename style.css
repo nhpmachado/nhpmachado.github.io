@@ -1,0 +1,250 @@
+/* --- 1. RESET E BASE --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Garante que padding não estica os elementos */
+}
+
+body {
+    background-color: #0a0a0a;
+    color: white;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    overflow: hidden; /* Impede scroll na página inteira */
+}
+
+/* --- 2. CONTENTOR DO MUSEU (AS FAIXAS) --- */
+.museum-container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+    padding-bottom: 60px;
+}
+
+.carousel-row {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+}
+
+.carousel-track {
+    display: flex;
+    width: max-content;
+    animation: scroll var(--speed, 40s) linear infinite;
+}
+
+/* Pausa a animação quando a classe .paused é adicionada pelo JS */
+.carousel-track.paused {
+    animation-play-state: paused !important;
+}
+
+@keyframes scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); } /* Move metade, o resto é o clone */
+}
+
+/* --- 3. OS CARTÕES (ITENS INDIVIDUAIS) --- */
+.card-item {
+    flex: 0 0 350px; /* Fixa o tamanho para não "esmagar" com 600 itens */
+    width: 380px;
+    height: 230px;
+    margin: 0 20px;
+    display: inline-block;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    background-color: #ffffff !important;
+    padding: 6.5px;
+    border-radius: 8px;
+}
+
+.card-item:hover {
+    transform: scale(1.1);
+    z-index: 10;
+}
+
+.card-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 4px;
+    display: block;
+}
+
+/* --- 4. MENU DOCK (ESTILO APPLE) --- */
+.menu {
+    position: fixed;
+    bottom: 60px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: max-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    background: rgba(25, 25, 25, 0.8);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    height: 60px;
+    padding: 0 25px;
+    border-radius: 50px;
+    gap: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.menu-logo {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+   /* border-right: 1px solid rgba(255, 255, 255, 0.2);
+    padding-right: 15px; menu divider entre o logo e categorias*/
+}
+
+.menu-logo img {
+    height: 30px; /* Garante que o logo não estica o menu */
+    width: auto;
+    display: block;
+}
+
+.menu a {
+    color: white;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    opacity: 0.6;
+    transition: opacity 0.2s;
+    white-space: nowrap;
+    text-transform: uppercase;
+}
+
+.menu a:hover {
+    opacity: 1;
+    color: #a855f7;
+}
+
+#pauseBtn {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: none;
+    background: #a855f7;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s;
+}
+
+#pauseBtn:active { transform: scale(0.9); }
+
+/* --- 5. JANELA MODAL (POP-UP) --- */
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.95);
+    z-index: 2000;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+#modal-rank {
+    color: #a855f7; /* O teu roxo */
+    font-family: Arial, sans-serif; /* Fontes sem serifa lidam melhor com estes símbolos */
+    font-size: 20px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+/* Estado inicial da imagem no modal */
+#modal-img {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out; /* Transição suave de meio segundo */
+    filter: brightness(0.9); /* Opcional: ligeiramente mais escuro para um look mais "museu" */
+}
+
+/* Classe que o JS vai aplicar quando a imagem carregar */
+#modal-img.loaded {
+    opacity: 1;
+    filter: brightness(1);
+}
+
+.modal.active { display: flex; }
+
+.modal-content {
+    background: #1a1a1a;
+    border: 1px solid #333;
+    width: 100%;
+    max-width: 850px;
+    border-radius: 25px;
+    position: relative;
+    padding: 40px;
+    animation: zoomIn 0.3s ease;
+}
+
+@keyframes zoomIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.close-modal {
+    position: absolute;
+    top: 20px;
+    right: 25px;
+    color: white;
+    font-size: 35px;
+    cursor: pointer;
+}
+
+.modal-body {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+}
+
+.modal-image-container img {
+    width: 400px;
+    max-width: 100%;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+    /*  border: 5px solid white; Moldura branca também no modal */
+}
+
+.modal-info-text h2 { margin-bottom: 10px; font-size: 28px; }
+.modal-info-text hr { border: 0; border-top: 1px solid #333; margin: 20px 0; }
+.modal-info-text p { margin: 10px 0; font-size: 18px; color: #ccc; }
+.modal-info-text strong { color: white; }
+
+/* Responsivo para telemóveis */
+@media (max-width: 768px) {
+    .modal-body { flex-direction: column; text-align: center; }
+    .modal-image-container img { width: 100%; }
+    .menu {
+        width: 90%;
+        padding: 0 15px;
+        height: auto;
+        padding: 10px;
+    }
+}
+
+/* Sentido Inverso para a Faixa do Meio
+#track2 {
+    animation-direction: reverse;
+} */
+
+.designer-credit {
+    position: fixed;
+    bottom: 24px; /* Fica logo abaixo do menu dock */
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.3); /* Cor muito suave para não distrair */
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    z-index: 999; /* Fica logo atrás do menu */
+}

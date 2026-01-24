@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Museu de Cartões de Visita</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="museum-container">
+        <div class="carousel-row"><div id="track1" class="carousel-track"></div></div>
+        <div class="carousel-row"><div id="track2" class="carousel-track"></div></div>
+        <div class="carousel-row"><div id="track3" class="carousel-track"></div></div>
+    </div>
+
+    <nav class="menu">
+        <div class="menu-logo">
+            <img src="icone.png" alt="Logo">
+        </div>
+        <a href="#" data-filter="todos">Todos</a>
+        <a href="#" data-filter="restauracao">Restauração</a>
+        <a href="#" data-filter="comercio">Comércio</a>
+        <a href="#" data-filter="saude">Saúde</a>
+        <a href="#" data-filter="oficinas">Oficinas</a>
+        <a href="#" data-filter="servicos">Serviços</a>
+        <a href="#" data-filter="industria">Indústria</a>
+        <button id="pauseBtn">ll</button>
+    </nav>
+
+    <footer class="designer-credit">
+        Designed by: <strong>Nuno Machado</strong>
+    </footer>
+
+    <div id="card-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="modal-body">
+                <div class="modal-image-container">
+                    <img id="modal-img" src="" alt="Cartão">
+                </div>
+                <div class="modal-info-text">
+                    <h2 id="modal-nome">Nome da Empresa</h2>
+                    <hr>
+                    <p><strong>Categoria:</strong> <span id="modal-categoria"></span></p>
+                    <p><strong>Localidade:</strong> <span id="modal-localidade"></span></p>
+                    <p><strong>Design:</strong> <span id="modal-rank" style="color: #a855f7; font-size: 24px;"></span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
