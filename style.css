@@ -47,29 +47,41 @@ body {
 
 /* --- 3. OS CARTÕES (ITENS INDIVIDUAIS) --- */
 .card-item {
-    flex: 0 0 350px; /* Fixa o tamanho para não "esmagar" com 600 itens */
+    flex: 0 0 350px;
     width: 380px;
     height: 230px;
     margin: 0 20px;
-    display: inline-block;
+    position: relative;
     cursor: pointer;
-    transition: transform 0.3s ease;
     background-color: #ffffff !important;
     padding: 6.5px;
     border-radius: 8px;
+    /* Impede que a imagem saia da moldura branca no zoom */
+    overflow: hidden;
+    /* Transição suave para a sombra, se quiseres adicionar */
+    transition: box-shadow 0.3s ease;
 }
 
+/* Removemos o transform do card-item para não criar espaços brancos */
 .card-item:hover {
-    transform: scale(1.1);
     z-index: 10;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
 }
 
 .card-item img {
     width: 100%;
     height: 100%;
+    /* Preenche todo o espaço interno da moldura */
     object-fit: cover;
     border-radius: 4px;
     display: block;
+    /* A animação agora é aplicada diretamente à imagem */
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Quando passas o rato no card, a imagem cresce lá dentro */
+.card-item:hover img {
+    transform: scale(1.1);
 }
 
 /* --- 4. MENU DOCK (ESTILO APPLE) --- */
@@ -89,7 +101,7 @@ body {
     height: 60px;
     padding: 0 25px;
     border-radius: 50px;
-    gap: 20px;
+    gap: 20px; /* Dá espaço entre os links, logo e botão */
     border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: 0 10px 30px rgba(0,0,0,0.5);
 }
@@ -97,13 +109,10 @@ body {
 .menu-logo {
     display: flex;
     align-items: center;
-    margin-right: 10px;
-   /* border-right: 1px solid rgba(255, 255, 255, 0.2);
-    padding-right: 15px; menu divider entre o logo e categorias*/
 }
 
 .menu-logo img {
-    height: 30px; /* Garante que o logo não estica o menu */
+    height: 30px;
     width: auto;
     display: block;
 }
